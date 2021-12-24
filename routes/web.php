@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/add', [TesController::class, 'addTes'])->name('add');
+// Route::get('/hasil', function(){
+//     return view('hasil');
+// });
+Route::post('carihasil', [TesController::class, 'cariHasil'])->name('carihasil');

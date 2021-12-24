@@ -8,10 +8,11 @@
         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
             <div class="navbar-nav ml-auto">
                 <a href="/" class="nav-item nav-link active">Beranda</a>
-                <a href="" class="nav-item nav-link">Tes Minat</a>
+                <a href="#nama" class="nav-item nav-link">Tes Minat</a>
+                <a href="#hasil" class="nav-item nav-link">Hasil</a>
                 <a href="/login" class="nav-item nav-link">Masuk</a>
-                {{-- <a href="team.html" class="nav-item nav-link">Chef</a>
-                <a href="menu.html" class="nav-item nav-link">Menu</a>
+                
+                {{-- <a href="menu.html" class="nav-item nav-link">Menu</a>
                 <a href="booking.html" class="nav-item nav-link">Booking</a>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
