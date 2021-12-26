@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TesModel;
 use RealRashid\SweetAlert\Facades\Alert;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TesController extends Controller
 {
-    // insert 
+    // insert
     public function addTes(Request $request){
         $tes = new TesModel;
 
@@ -53,18 +55,100 @@ class TesController extends Controller
         $tes->d8    = $request->d8;
         $tes->save();
 
-        toast('Data Berhasil Dikirim!','success');
+        $keyword = $request->whatsapp;
+        $data = TesModel::where('whatsapp','=',$keyword)->get()->first();
 
-        return redirect('/');
-        
+        if ($data){
+            $koleris = $data->a1+$data->a2+$data->a3+$data->a4+$data->a5+$data->a6+$data->a7+$data->a8;
+            $sanguin = $data->b1+$data->b2+$data->b3+$data->b4+$data->b5+$data->b6+$data->b7+$data->b8;
+            $phlegmetis = $data->c1+$data->c2+$data->c3+$data->c4+$data->c5+$data->c6+$data->c7+$data->c8;
+            $melankolis = $data->d1+$data->d2+$data->d3+$data->d4+$data->d5+$data->d6+$data->d7+$data->d8;
+
+            $tertinggi = max($koleris,$sanguin,$phlegmetis,$melankolis);
+
+            if($tertinggi == $koleris){
+                $anak = 'Koleris';
+            }else if($tertinggi == $sanguin){
+                $anak = 'Sanguin';
+            }else if($tertinggi == $phlegmetis){
+                $anak = 'Phlegmetis';
+            }else if($tertinggi == $melankolis){
+                $anak = 'Melankolis';
+            }
+
+            toast('Data Berhasil Ditemukan!','success');
+            return view('/hasil', compact('data', 'koleris','sanguin', 'phlegmetis', 'melankolis','tertinggi','anak'));
+
+        }
+        // toast('Data Berhasil Dikirim!','success');
+
+        // return redirect('/');
+
     }
 
     public function cariHasil(Request $request){
         $keyword = $request->whatsapp;
-        $data = TesModel::where('whatsapp','=',$keyword)->get();
+        $data = TesModel::where('whatsapp','=',$keyword)->get()->first();
 
-        $jml = $data->a1 + $data->a2;
+        if ($data){
+            $koleris = $data->a1+$data->a2+$data->a3+$data->a4+$data->a5+$data->a6+$data->a7+$data->a8;
+            $sanguin = $data->b1+$data->b2+$data->b3+$data->b4+$data->b5+$data->b6+$data->b7+$data->b8;
+            $phlegmetis = $data->c1+$data->c2+$data->c3+$data->c4+$data->c5+$data->c6+$data->c7+$data->c8;
+            $melankolis = $data->d1+$data->d2+$data->d3+$data->d4+$data->d5+$data->d6+$data->d7+$data->d8;
 
-        return view('/hasil', compact('data','jml'));
+            $tertinggi = max($koleris,$sanguin,$phlegmetis,$melankolis);
+
+            if($tertinggi == $koleris){
+                $anak = 'Koleris';
+            }else if($tertinggi == $sanguin){
+                $anak = 'Sanguin';
+            }else if($tertinggi == $phlegmetis){
+                $anak = 'Phlegmetis';
+            }else if($tertinggi == $melankolis){
+                $anak = 'Melankolis';
+            }
+
+            toast('Data Berhasil Ditemukan!','success');
+            return view('/hasil', compact('data', 'koleris','sanguin', 'phlegmetis', 'melankolis','tertinggi','anak'));
+
+        }else{
+            Alert::Warning('Data Tidak Ada', 'Silahkan isi form survey terlebih dahulu ya :)');
+            return redirect('/#hasil');
+        }
+    }
+
+    public function pdf(Request $request){
+        $keyword = $request->whatsapp;
+        $data = TesModel::where('whatsapp','=',$keyword)->get()->first();
+
+        if ($data){
+            $koleris = $data->a1+$data->a2+$data->a3+$data->a4+$data->a5+$data->a6+$data->a7+$data->a8;
+            $sanguin = $data->b1+$data->b2+$data->b3+$data->b4+$data->b5+$data->b6+$data->b7+$data->b8;
+            $phlegmetis = $data->c1+$data->c2+$data->c3+$data->c4+$data->c5+$data->c6+$data->c7+$data->c8;
+            $melankolis = $data->d1+$data->d2+$data->d3+$data->d4+$data->d5+$data->d6+$data->d7+$data->d8;
+
+            $tertinggi = max($koleris,$sanguin,$phlegmetis,$melankolis);
+
+            if($tertinggi == $koleris){
+                $anak = 'Koleris';
+            }else if($tertinggi == $sanguin){
+                $anak = 'Sanguin';
+            }else if($tertinggi == $phlegmetis){
+                $anak = 'Phlegmetis';
+            }else if($tertinggi == $melankolis){
+                $anak = 'Melankolis';
+            }
+
+
+            toast('Data Berhasil Ditemukan!','success');
+            $pdf = PDF::loadview('card-pdf',compact('data', 'koleris','sanguin', 'phlegmetis', 'melankolis','tertinggi','anak'))->setOptions(['defaultFont' => 'sans-serif']);
+            return $pdf->download('tesCard-pdf');
+
+            // return view('/hasil', compact('data', 'koleris','sanguin', 'phlegmetis', 'melankolis','tertinggi','anak'));
+
+        }else{
+            Alert::Warning('Data Tidak Ada', 'Silahkan isi form survey terlebih dahulu ya :)');
+            return redirect('/#hasil');
+        }
     }
 }

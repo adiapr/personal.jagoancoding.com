@@ -22,7 +22,7 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::post('/add', [TesController::class, 'addTes'])->name('add');
-// Route::get('/hasil', function(){
-//     return view('hasil');
-// });
 Route::post('carihasil', [TesController::class, 'cariHasil'])->name('carihasil');
+
+// DOWNLOAD PDF
+Route::post('/download', [TesController::class, 'pdf'])->name('download');

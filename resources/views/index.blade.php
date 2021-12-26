@@ -20,13 +20,12 @@
                             <img src="https://assets2.varsitytutors.com/vt-ecom-catalog-ui/images/products/learn_scratch_from_scratch-2x.jpg" alt="Image">
                         </div>
                         <div class="carousel-text">
-                            <h1>Best <span>Quality</span> Ingredients</h1>
+                            <h1>Tes <span>Bakat</span> dan <span>Minat</span></h1>
                             <p>
-                                Lorem ipsum dolor sit amet elit. Phasellus ut mollis mauris. Vivamus egestas eleifend dui ac consequat at lectus in malesuada
+                                Apakah yang cocok untuk masa depan ananda?
                             </p>
                             <div class="carousel-btn">
-                                <a class="btn custom-btn" href="">View Menu</a>
-                                <a class="btn custom-btn" href="">Book Table</a>
+                                <a class="btn custom-btn" href="">Cek Sekarang</a>
                             </div>
                         </div>
                     </div>
@@ -64,7 +63,7 @@
             </div>
         </div>
         <!-- Carousel End -->
-        
+
 
         <!-- About Start -->
         <div class="about">
@@ -86,7 +85,7 @@
                                     <button type="button" class="btn btn-primary btn-sm mt-2" data-toggle="modal" data-target="#exampleModal">
                                         <i class="fa fa-book"></i> Cek Hasil Tes
                                     </button>
-                                    
+
                                     <!-- Modal -->
                                     <form action="{{ route('carihasil') }}" method="post">
                                         @csrf
@@ -143,7 +142,7 @@
                     <div class="col-md-12">
                         <hr>
                     </div>
-                    
+
                     <div class="col-md-12 mt-5 text-center" id="nama">
                         <h2>Tes Minat Bakat Untuk Anak Usia Dini</h2>
                         <p>Pilih salah satu opsi yang paling menggambarkan anak Anda di setiap barisnya.
@@ -176,7 +175,7 @@
                             <input type="number" name="whatsapp" required value="{{ old('whatsapp') }}" class="form-control form-control-sm" placeholder="Awali dengan 08 (08xxxx)">
                         </div>
                     </div>
-                    
+
                     {{-- 1. --}}
                     <div class="col-md-12 mt-3">
                         <div class="card shadow-sm p-3">
@@ -396,14 +395,14 @@
                     <div class="col-md-12 mt-3 text-right">
                         <button class="btn btn-primary pull-right" type="submit">Kirim Data</button>
                     </div>
-                
+
                 </div>
                 </form>
             </div>
         </div>
         <!-- About End -->
-        
-        
+
+
 
 
 
